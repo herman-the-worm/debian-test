@@ -43,7 +43,6 @@ RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
     sudo \
     lsb-release \
-    jq \
     && rm -rf /var/lib/apt/lists/*
 
 RUN adduser --disabled-password --gecos "" --uid 1001 runner \
@@ -53,7 +52,13 @@ RUN adduser --disabled-password --gecos "" --uid 1001 runner \
     && echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers \
     && echo "Defaults env_keep += \"DEBIAN_FRONTEND\"" >> /etc/sudoers
 
+RUN apt-get install -y --no-install-recommends \
+    jq \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /home/runner
+
 
 COPY --chown=runner:docker --from=build /actions-runner .
 COPY --from=build /usr/local/lib/docker/cli-plugins/docker-buildx /usr/local/lib/docker/cli-plugins/docker-buildx
