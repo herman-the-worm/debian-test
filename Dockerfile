@@ -1,8 +1,8 @@
 # Source: https://github.com/dotnet/dotnet-docker
 FROM mcr.microsoft.com/dotnet/runtime-deps:6.0-jammy as build
 
-ARG TARGETOS
-ARG TARGETARCH
+ARG TARGETOS=linux
+ARG TARGETARCH=amd64
 ARG RUNNER_VERSION=2.311.0
 ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
 ARG DOCKER_VERSION=24.0.6
@@ -33,6 +33,7 @@ RUN export RUNNER_ARCH=${TARGETARCH} \
     && chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
 
 FROM mcr.microsoft.com/dotnet/runtime-deps:6.0-jammy
+
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV RUNNER_MANUALLY_TRAP_SIG=1
