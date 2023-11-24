@@ -8,7 +8,7 @@ ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
 ARG DOCKER_VERSION=24.0.6
 ARG BUILDX_VERSION=0.11.2
 
-RUN apt update -y && apt install curl unzip -y
+RUN apt update -y && apt install curl unzip jq -y
 
 WORKDIR /actions-runner
 RUN export RUNNER_ARCH=${TARGETARCH} \
@@ -52,11 +52,6 @@ RUN adduser --disabled-password --gecos "" --uid 1001 runner \
     && usermod -aG docker runner \
     && echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers \
     && echo "Defaults env_keep += \"DEBIAN_FRONTEND\"" >> /etc/sudoers
-
-RUN apt-get install -y --no-install-recommends \
-    jq \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /home/runner
 
