@@ -1,9 +1,9 @@
 # Source: https://github.com/dotnet/dotnet-docker
 FROM mcr.microsoft.com/dotnet/runtime-deps:6.0-jammy as build
 
-ARG TARGETOS
-ARG TARGETARCH
-ARG RUNNER_VERSION
+ARG TARGETOS=linux
+ARG TARGETARCH=arm64
+ARG RUNNER_VERSION=2.311.0
 ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
 ARG DOCKER_VERSION=24.0.6
 ARG BUILDX_VERSION=0.11.2
