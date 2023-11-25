@@ -72,6 +72,7 @@ RUN apt-get update -y \
         unzip \
         wget \
         xz-utils \
+        docker \
         zip \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
