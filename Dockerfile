@@ -12,7 +12,7 @@ RUN apt update -y \
     && apt install -y \
         curl \
         unzip \
-        jq \
+        jq
 
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
