@@ -49,7 +49,32 @@ RUN apt-get update -y \
         lsb-release \
         curl \
         unzip \
-        jq
+        jq \
+        apt-transport-https \
+        apt-utils \
+        ca-certificates \
+        curl \
+        gcc \
+        git \
+        iproute2 \
+        iptables \
+        jq \
+        libyaml-dev \
+        locales \
+        lsb-release \
+        openssl \
+        pigz \
+        pkg-config \
+        software-properties-common \
+        time \
+        tzdata \
+        uidmap \
+        unzip \
+        wget \
+        xz-utils \
+        zip \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
 
 RUN adduser --disabled-password --gecos "" --uid 1001 runner \
     && groupadd docker --gid 123 \
