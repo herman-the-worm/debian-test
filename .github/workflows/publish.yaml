@@ -52,11 +52,14 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           build-args: RUNNER_VERSION=2.311.0
+
           push: true
           labels: org.opencontainers.image.source=runner-standard
           load: false
           no-cache: false
           pull: false
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           context: .
           platforms: |
             linux/amd64
