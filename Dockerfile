@@ -8,7 +8,7 @@ ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
 ARG DOCKER_VERSION=24.0.6
 ARG BUILDX_VERSION=0.11.2
 
-RUN apt update -y && apt install curl unzip jq -y
+RUN apt update -y && apt install curl unzip -y
 
 WORKDIR /actions-runner
 RUN export RUNNER_ARCH=${TARGETARCH} \
@@ -34,7 +34,6 @@ RUN export RUNNER_ARCH=${TARGETARCH} \
 
 FROM mcr.microsoft.com/dotnet/runtime-deps:6.0-jammy
 
-
 ENV DEBIAN_FRONTEND=noninteractive
 ENV RUNNER_MANUALLY_TRAP_SIG=1
 ENV ACTIONS_RUNNER_PRINT_LOG_TO_STDOUT=1
@@ -54,7 +53,6 @@ RUN adduser --disabled-password --gecos "" --uid 1001 runner \
     && echo "Defaults env_keep += \"DEBIAN_FRONTEND\"" >> /etc/sudoers
 
 WORKDIR /home/runner
-
 
 COPY --chown=runner:docker --from=build /actions-runner .
 COPY --from=build /usr/local/lib/docker/cli-plugins/docker-buildx /usr/local/lib/docker/cli-plugins/docker-buildx
