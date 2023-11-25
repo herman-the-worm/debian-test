@@ -78,6 +78,7 @@ RUN apt-get update -y \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
+
 RUN adduser --disabled-password --gecos "" --uid 1001 runner \
     && groupadd docker --gid 123 \
     && usermod -aG sudo runner \
