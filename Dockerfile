@@ -46,7 +46,10 @@ ENV ImageOS=ubuntu22
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
         sudo \
-        lsb-release
+        lsb-release \
+        curl \
+        unzip \
+        jq
 
 RUN adduser --disabled-password --gecos "" --uid 1001 runner \
     && groupadd docker --gid 123 \
@@ -61,10 +64,6 @@ COPY --chown=runner:docker --from=build /actions-runner .
 COPY --from=build /usr/local/lib/docker/cli-plugins/docker-buildx /usr/local/lib/docker/cli-plugins/docker-buildx
 
 RUN install -o root -g root -m 755 docker/* /usr/bin/ && rm -rf docker
-# Install jq and curl with apt-get
-RUN apt-get update -y && \
-    apt-get install -y jq curl && \
-    rm -rf /var/lib/apt/lists/*
 
 USER runner  # Switch back to the runner user
 
