@@ -61,9 +61,6 @@ COPY --chown=runner:docker --from=build /actions-runner .
 COPY --from=build /usr/local/lib/docker/cli-plugins/docker-buildx /usr/local/lib/docker/cli-plugins/docker-buildx
 
 RUN install -o root -g root -m 755 docker/* /usr/bin/ && rm -rf docker
-
-USER root  # Switch to root temporarily
-
 # Install jq and curl with apt-get
 RUN apt-get update -y && \
     apt-get install -y jq curl && \
