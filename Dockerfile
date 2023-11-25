@@ -8,7 +8,11 @@ ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
 ARG DOCKER_VERSION=24.0.6
 ARG BUILDX_VERSION=0.11.2
 
-RUN apt update -y && apt install curl unzip -y
+RUN apt update -y \
+    && apt install -y \
+        curl \
+        unzip \
+        jq
 
 WORKDIR /actions-runner
 RUN export RUNNER_ARCH=${TARGETARCH} \
@@ -41,9 +45,8 @@ ENV ImageOS=ubuntu22
 
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
-    sudo \
-    lsb-release \
-    && rm -rf /var/lib/apt/lists/*
+        sudo \
+        lsb-release
 
 RUN adduser --disabled-password --gecos "" --uid 1001 runner \
     && groupadd docker --gid 123 \
