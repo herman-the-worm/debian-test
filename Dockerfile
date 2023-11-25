@@ -9,13 +9,10 @@ ARG DOCKER_VERSION=24.0.6
 ARG BUILDX_VERSION=0.11.2
 
 RUN apt update -y \
-    && apt install -y \
+    && apt install -y  --no-install-recommends \
         curl \
         unzip \
-        jq
-
-RUN apt-get update -y \
-    && apt-get install -y --no-install-recommends \
+        jq \
         sudo \
         lsb-release \
         curl \
@@ -24,7 +21,6 @@ RUN apt-get update -y \
         apt-transport-https \
         apt-utils \
         ca-certificates \
-        curl \
         gcc \
         git \
         iproute2 \
@@ -40,7 +36,6 @@ RUN apt-get update -y \
         time \
         tzdata \
         uidmap \
-        unzip \
         wget \
         xz-utils \
         docker \
