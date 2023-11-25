@@ -12,7 +12,7 @@ RUN apt update -y \
     && apt install -y \
         curl \
         unzip \
-        jq
+        jq \
 
 WORKDIR /actions-runner
 RUN export RUNNER_ARCH=${TARGETARCH} \
@@ -63,3 +63,8 @@ COPY --from=build /usr/local/lib/docker/cli-plugins/docker-buildx /usr/local/lib
 RUN install -o root -g root -m 755 docker/* /usr/bin/ && rm -rf docker
 
 USER runner
+
+# Install jq and curl
+RUN sudo apt-get update -y && \
+    sudo apt-get install -y jq curl && \
+    sudo rm -rf /var/lib/apt/lists/*
