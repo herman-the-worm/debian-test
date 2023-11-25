@@ -12,7 +12,7 @@ RUN apt update -y \
     && apt install -y \
         curl \
         unzip \
-        jq \
+        jq
 
 WORKDIR /actions-runner
 RUN export RUNNER_ARCH=${TARGETARCH} \
