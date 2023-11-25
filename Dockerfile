@@ -12,7 +12,42 @@ RUN apt update -y \
     && apt install -y \
         curl \
         unzip \
-        jq
+        jq \
+
+RUN apt-get update -y \
+    && apt-get install -y --no-install-recommends \
+        sudo \
+        lsb-release \
+        curl \
+        unzip \
+        jq \
+        apt-transport-https \
+        apt-utils \
+        ca-certificates \
+        curl \
+        gcc \
+        git \
+        iproute2 \
+        iptables \
+        jq \
+        libyaml-dev \
+        locales \
+        lsb-release \
+        openssl \
+        pigz \
+        pkg-config \
+        software-properties-common \
+        time \
+        tzdata \
+        uidmap \
+        unzip \
+        wget \
+        xz-utils \
+        docker \
+        zip \
+        libc6 \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /actions-runner
 RUN export RUNNER_ARCH=${TARGETARCH} \
