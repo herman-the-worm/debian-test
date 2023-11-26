@@ -162,8 +162,13 @@ RUN apt-get update -y \
         xz-utils \
         zip \
         zsync \
+        apt-fast \
+        cmake \
+        openssl \
+        zstd \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
 
 
 
