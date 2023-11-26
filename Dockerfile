@@ -1,8 +1,8 @@
 # Source: https://github.com/dotnet/dotnet-docker
 FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/runtime-deps:6.0-jammy as build
 
-ARG TARGETOS
-ARG TARGETARCH
+ARG TARGETOS=linux
+ARG TARGETARCH=amd64
 ARG RUNNER_VERSION=2.311.0
 ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
 ARG DOCKER_VERSION=24.0.6
@@ -79,10 +79,7 @@ RUN apt-get update -y \
         curl \
         file \
         git \
-        mkdir \
-        rm \
         unzip   \
-        which \
         xz-utils \
         zip \
         libglu1-mesa \
