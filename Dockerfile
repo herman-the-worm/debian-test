@@ -1,8 +1,8 @@
 # Source: https://github.com/dotnet/dotnet-docker
 FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/runtime-deps:6.0-jammy as build
 
-ARG TARGETOS=linux
-ARG TARGETARCH=amd64
+ARG TARGETOS
+ARG TARGETARCH
 ARG RUNNER_VERSION=2.311.0
 ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
 ARG DOCKER_VERSION=24.0.6
@@ -83,8 +83,88 @@ RUN apt-get update -y \
         xz-utils \
         zip \
         libglu1-mesa \
-        && apt-get clean \
-        && rm -rf /var/lib/apt/lists/*
+        acl \
+        aria2 \
+        autoconf \
+        automake \
+        binutils \
+        bison \
+        brotli \
+        build-essential \
+        bzip2 \
+        coreutils \
+        dbus \
+        dnsutils \
+        dpkg \
+        fakeroot \
+        flex \
+        fonts-noto-color-emoji \
+        ftp \
+        gnupg2 \
+        haveged \
+        imagemagick \
+        iproute2 \
+        iputils-ping \
+        lib32z1 \
+        libc++-dev \
+        libc++abi-dev \
+        libcurl4 \
+        libgbm-dev \
+        libgconf-2-4 \
+        libgsl-dev \
+        libgtk-3-0 \
+        libmagic-dev \
+        libmagickcore-dev \
+        libmagickwand-dev \
+        libsecret-1-dev \
+        libsqlite3-dev \
+        libssl-dev \
+        libtool \
+        libunwind8 \
+        libxkbfile-dev \
+        libxss1 \
+        locales \
+        m4 \
+        mediainfo \
+        mercurial \
+        net-tools \
+        netcat \
+        openssh-client \
+        p7zip-full \
+        p7zip-rar \
+        parallel \
+        pass \
+        patchelf \
+        pkg-config \
+        pollinate \
+        python-is-python3 \
+        rpm \
+        rsync \
+        shellcheck \
+        sphinxsearch \
+        sqlite3 \
+        ssh \
+        sshpass \
+        subversion \
+        sudo \
+        swig \
+        tar \
+        telnet \
+        texinfo \
+        time \
+        tk \
+        tzdata \
+        unzip \
+        upx \
+        wget \
+        xorriso \
+        xvfb \
+        xz-utils \
+        zip \
+        zsync \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 
 
 RUN adduser --disabled-password --gecos "" --uid 1001 runner \
