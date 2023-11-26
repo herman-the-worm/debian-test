@@ -75,6 +75,17 @@ RUN apt-get update -y \
         docker \
         zip \
         libc6 \
+        bash \
+        curl \
+        file \
+        git \
+        mkdir \
+        rm \
+        unzip   \
+        which \
+        xz-utils \
+        zip \
+        libglu1-mesa \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
