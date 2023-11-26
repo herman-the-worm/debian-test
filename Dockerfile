@@ -9,40 +9,10 @@ ARG DOCKER_VERSION=24.0.6
 ARG BUILDX_VERSION=0.11.2
 
 RUN apt update -y \
-    && apt install -y  --no-install-recommends \
+    && apt install -y \
         curl \
         unzip \
-        jq \
-        sudo \
-        lsb-release \
-        curl \
-        unzip \
-        jq \
-        apt-transport-https \
-        apt-utils \
-        ca-certificates \
-        gcc \
-        git \
-        iproute2 \
-        iptables \
-        jq \
-        libyaml-dev \
-        locales \
-        lsb-release \
-        openssl \
-        pigz \
-        pkg-config \
-        software-properties-common \
-        time \
-        tzdata \
-        uidmap \
-        wget \
-        xz-utils \
-        docker \
-        zip \
-        libc6 \
-        && apt-get clean \
-        && rm -rf /var/lib/apt/lists/*
+        jq
 
 WORKDIR /actions-runner
 RUN export RUNNER_ARCH=${TARGETARCH} \
