@@ -45,49 +45,49 @@ ENV ImageOS=ubuntu22
 
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
-        sudo \
-        lsb-release \
-        curl \
-        unzip \
-        jq \
         apt-transport-https \
         apt-utils \
+        bash \
         ca-certificates \
+        coreutils \
         curl \
+        dbus \
+        docker \
+        file \
         gcc \
         git \
         iproute2 \
         iptables \
         jq \
+        lib32z1 \
+        libc6 \
+        libglu1-mesa \
         libyaml-dev \
         locales \
         lsb-release \
         openssl \
         pigz \
         pkg-config \
+        snapd \
         software-properties-common \
+        sudo \
         time \
         tzdata \
         uidmap \
-        unzip \
+        unzip   \
         wget \
         xz-utils \
-        docker \
         zip \
-        libc6 \
-        bash \
-        curl \
-        file \
-        git \
-        unzip   \
-        xz-utils \
-        zip \
-        libglu1-mesa \
-        coreutils \
-        dbus \
-        lib32z1 \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
+
+
+RUN curl -fsSL https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.13.9-stable.tar.xz -o flutter.tar.xz \
+    && tar xf flutter.tar.xz -C /opt \
+    && rm flutter.tar.xz
+
+ENV PATH="$PATH:/opt/flutter/bin"
+RUN git config --global --add safe.directory /opt/flutter
 
 
 RUN adduser --disabled-password --gecos "" --uid 1001 runner \
