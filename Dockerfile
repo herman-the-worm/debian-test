@@ -14,8 +14,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV RUNNER_MANUALLY_TRAP_SIG=1
 ENV ACTIONS_RUNNER_PRINT_LOG_TO_STDOUT=1
 
-RUN apt-get update -y \
-    && apt-get install -y --no-install-recommends \
+RUN apt update -y \
+    && apt install -y --no-install-recommends \
         apt-transport-https \
         apt-utils \
         bash \
@@ -30,7 +30,6 @@ RUN apt-get update -y \
         iproute2 \
         iptables \
         jq \
-        lib32z1 \
         libc6 \
         libglu1-mesa \
         libyaml-dev \
@@ -49,7 +48,7 @@ RUN apt-get update -y \
         wget \
         xz-utils \
         zip \
-        && apt-get clean \
+        && apt clean \
         && rm -rf /var/lib/apt/lists/*
 
 RUN adduser --disabled-password --gecos "" --uid 1001 runner \
