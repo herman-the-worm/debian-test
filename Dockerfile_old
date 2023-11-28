@@ -81,13 +81,20 @@ RUN apt-get update -y \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
-
 RUN curl -fsSL https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.13.9-stable.tar.xz -o flutter.tar.xz \
     && tar xf flutter.tar.xz -C /opt \
     && rm flutter.tar.xz
-
 ENV PATH="$PATH:/opt/flutter/bin"
-RUN git config --global --add safe.directory /opt/flutter
+
+
+
+RUN echo "chmod -R 777 /opt"
+RUN chmod -R 777 /opt
+RUN echo "chmod -R 777 /usr/share"
+RUN chmod -R 777 /usr/share
+
+
+
 
 
 RUN adduser --disabled-password --gecos "" --uid 1001 runner \
@@ -99,11 +106,13 @@ RUN adduser --disabled-password --gecos "" --uid 1001 runner \
 
 WORKDIR /home/runner
 
+RUN git config --global --add safe.directory '*'
+
 COPY --chown=runner:docker --from=build /actions-runner .
 COPY --from=build /usr/local/lib/docker/cli-plugins/docker-buildx /usr/local/lib/docker/cli-plugins/docker-buildx
 
 RUN install -o root -g root -m 755 docker/* /usr/bin/ && rm -rf docker
 
-USER runner  # Switch back to the runner user
-
 USER runner
+
+RUN git config --global --add safe.directory '*'
