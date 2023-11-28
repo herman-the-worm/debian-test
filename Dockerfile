@@ -14,7 +14,43 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV RUNNER_MANUALLY_TRAP_SIG=1
 ENV ACTIONS_RUNNER_PRINT_LOG_TO_STDOUT=1
 
-RUN apt update -y && apt install curl unzip jq tar -y
+RUN apt-get update -y \
+    && apt-get install -y --no-install-recommends \
+        apt-transport-https \
+        apt-utils \
+        bash \
+        ca-certificates \
+        coreutils \
+        curl \
+        dbus \
+        docker \
+        file \
+        gcc \
+        git \
+        iproute2 \
+        iptables \
+        jq \
+        lib32z1 \
+        libc6 \
+        libglu1-mesa \
+        libyaml-dev \
+        locales \
+        lsb-release \
+        openssl \
+        pigz \
+        pkg-config \
+        snapd \
+        software-properties-common \
+        sudo \
+        time \
+        tzdata \
+        uidmap \
+        unzip   \
+        wget \
+        xz-utils \
+        zip \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
 
 RUN adduser --disabled-password --gecos "" --uid 1001 runner \
     && groupadd docker --gid 123 \
