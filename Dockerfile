@@ -24,6 +24,9 @@ RUN apt-get update -y \
     tar \
     unzip \
     ca-certificates \
+    wget \
+    apt-utils \
+    gnupg2 \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -40,17 +43,18 @@ RUN curl -f -L -o runner.tar.gz https://github.com/actions/runner/releases/downl
     && tar xzf ./runner.tar.gz \
     && rm runner.tar.gz
 
-
 RUN curl -f -L -o runner-container-hooks.zip https://github.com/actions/runner-container-hooks/releases/download/v${RUNNER_CONTAINER_HOOKS_VERSION}/actions-runner-hooks-k8s-${RUNNER_CONTAINER_HOOKS_VERSION}.zip \
     && unzip ./runner-container-hooks.zip -d ./k8s \
     && rm runner-container-hooks.zip
+
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
 
 USER runner
 
 RUN sudo apt update -y \
     && sudo apt install -y --no-install-recommends \
         apt-transport-https \
-        apt-utils \
         bash \
         coreutils \
         dbus \
@@ -87,6 +91,7 @@ WORKDIR /home/runner
 RUN curl -fsSL https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.13.9-stable.tar.xz -o flutter.tar.xz \
     && tar xf flutter.tar.xz -C .  \
     && rm flutter.tar.xz
+
 ENV PATH="$PATH:/home/runner/flutter/bin"
 
 
