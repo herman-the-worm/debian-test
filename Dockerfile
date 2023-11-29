@@ -16,9 +16,9 @@ ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Set environment variables for non-interactive installation
-ENV CHROME_DIR="/opt/google-chrome/chrome-linux64" \
+ENV CHROME_DIR="/opt/google-chrome" \
     CHROMEDRIVER_DIR="/opt/chromedriver" \
-    PATH="/opt/google-chrome/chrome-linux64:/opt/chromedriver:$PATH"
+    PATH="/opt/google-chrome/chrome-linux64:/opt/chromedriver/chromedriver-linux64:$PATH"
 ENV RUNNER_MANUALLY_TRAP_SIG=1
 ENV ACTIONS_RUNNER_PRINT_LOG_TO_STDOUT=1
 
