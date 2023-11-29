@@ -12,6 +12,9 @@ ARG RUNNER_ARCH="x64"
 # ex: 0.3.1
 ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
 
+# Set non-interactive frontend for apt-get (prevents tzdata prompt)
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Set environment variables for non-interactive installation
 ENV CHROME_DIR="/opt/google-chrome/chrome-linux64" \
     CHROMEDRIVER_DIR="/opt/chromedriver" \
