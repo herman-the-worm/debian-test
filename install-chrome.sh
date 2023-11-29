@@ -40,7 +40,20 @@ sudo apt-get update -y && sudo apt-get install -y --no-install-recommends --fix-
     libxfixes3 \
     libxkbcommon0 \
     libxrandr2 \
-    wget \
+    libnss3 \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+     libcups2 \
+     libxkbcommon \
+     libxkbcommon-x11-dev \
+     libxcomposite-dev \
+     libxdamage \
+     libxrandr-dev \
+     libgbm-dev \
+     libpango-1.0-0 \
+     libasound2-dev \
+     libcairo2-dev \
+     wget \
     xdg-utils \
     jq \
     && sudo apt-get clean \
