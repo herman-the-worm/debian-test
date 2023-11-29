@@ -12,7 +12,10 @@ ARG RUNNER_ARCH="x64"
 # ex: 0.3.1
 ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
 
-ENV DEBIAN_FRONTEND=noninteractive
+# Set environment variables for non-interactive installation
+ENV DEBIAN_FRONTEND=noninteractive \
+    CHROME_DIR="/opt/google-chrome" \
+    CHROMEDRIVER_DIR="/opt/chromedriver"
 ENV RUNNER_MANUALLY_TRAP_SIG=1
 ENV ACTIONS_RUNNER_PRINT_LOG_TO_STDOUT=1
 
@@ -47,10 +50,18 @@ RUN curl -f -L -o runner-container-hooks.zip https://github.com/actions/runner-c
     && unzip ./runner-container-hooks.zip -d ./k8s \
     && rm runner-container-hooks.zip
 
-RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-
 USER runner
+
+
+
+WORKDIR /home/runner
+
+# Copy the installation script
+COPY install-chrome.sh /usr/local/bin/install-chrome.sh
+RUN sudo chmod +x /usr/local/bin/install-chrome.sh
+
+# Run the installation script
+RUN sudo /usr/local/bin/install-chrome.sh $CHROME_DIR $CHROMEDRIVER_DIR
 
 RUN sudo apt update -y \
     && sudo apt install -y --no-install-recommends \
@@ -79,14 +90,10 @@ RUN sudo apt update -y \
         time \
         tzdata \
         uidmap \
-        wget \
         xz-utils \
         zip \
-        google-chrome-stable \
         && sudo apt clean \
         && sudo rm -rf /var/lib/apt/lists/*
-
-WORKDIR /home/runner
 
 RUN curl -fsSL https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.13.9-stable.tar.xz -o flutter.tar.xz \
     && tar xf flutter.tar.xz -C .  \
