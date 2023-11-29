@@ -78,6 +78,7 @@ RUN sudo apt update -y \
         wget \
         xz-utils \
         zip \
+        google-chrome-stable \
         && sudo apt clean \
         && sudo rm -rf /var/lib/apt/lists/*
 
