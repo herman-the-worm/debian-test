@@ -13,9 +13,9 @@ ARG RUNNER_ARCH="x64"
 ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
 
 # Set environment variables for non-interactive installation
-ENV DEBIAN_FRONTEND=noninteractive \
-    CHROME_DIR="/opt/google-chrome" \
-    CHROMEDRIVER_DIR="/opt/chromedriver"
+ENV CHROME_DIR="/opt/google-chrome/chrome-linux64" \
+    CHROMEDRIVER_DIR="/opt/chromedriver" \
+    PATH="/opt/google-chrome/chrome-linux64:/opt/chromedriver:$PATH"
 ENV RUNNER_MANUALLY_TRAP_SIG=1
 ENV ACTIONS_RUNNER_PRINT_LOG_TO_STDOUT=1
 
@@ -62,6 +62,9 @@ RUN sudo chmod +x /usr/local/bin/install-chrome.sh
 
 # Run the installation script
 RUN sudo /usr/local/bin/install-chrome.sh $CHROME_DIR $CHROMEDRIVER_DIR
+
+# Add Chrome and ChromeDriver directories to PATH
+ENV PATH=$PATH:$CHROME_DIR:$CHROMEDRIVER_DIR
 
 RUN sudo apt update -y \
     && sudo apt install -y --no-install-recommends \

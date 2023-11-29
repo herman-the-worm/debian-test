@@ -5,6 +5,8 @@ set -e
 CHROME_DIR=$1
 CHROMEDRIVER_DIR=$2
 
+
+
 # Update and install dependencies for Google Chrome
 sudo apt-get update -y && sudo apt-get install -y --no-install-recommends --fix-missing \
     ca-certificates \
@@ -43,6 +45,10 @@ sudo apt-get update -y && sudo apt-get install -y --no-install-recommends --fix-
     jq \
     && sudo apt-get clean \
     && sudo rm -rf /var/lib/apt/lists/*
+
+# Create directories for Chrome and ChromeDriver
+mkdir -p $CHROME_DIR
+mkdir -p $CHROMEDRIVER_DIR
 
 # Download the webpage
 curl -s https://googlechromelabs.github.io/chrome-for-testing/ -o chrome-for-testing.html
