@@ -7,6 +7,6 @@ apt-get update -y && apt-get install -y \
     --fix-missing \
      google-chrome-stable
 
-google-chrome --headless --dump-dom https://www.google.com --remote-debugging-port=9222
-
-google-chrome --headless --no-sandbox --disable-gpu --dump-dom https://www.google.com
+#google-chrome --headless --dump-dom https://www.google.com --remote-debugging-port=9222
+#
+#google-chrome --headless --no-sandbox --disable-gpu --dump-dom https://www.google.com
