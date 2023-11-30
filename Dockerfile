@@ -69,7 +69,6 @@ RUN sudo chmod +x /usr/local/bin/install-chrome.sh
 
 RUN sudo /usr/local/bin/install-chrome.sh
 RUN sudo /usr/local/bin/install-chrome-driver.sh $CHROMEDRIVER_DIR
-RUN sudo /usr/local/bin/install-edge.sh
 
 # Add ChromeDriver directories to PATH
 ENV PATH=$PATH:$CHROMEDRIVER_DIR
