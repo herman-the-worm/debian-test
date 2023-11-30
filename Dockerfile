@@ -16,8 +16,7 @@ ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Set environment variables for non-interactive installation
-ENV CHROME_DIR="/opt/google-chrome" \
-    CHROMEDRIVER_DIR="/opt/chromedriver" \
+ENV CHROMEDRIVER_DIR="/opt/chromedriver" \
     PATH="/opt/google-chrome/chrome-linux64:/opt/chromedriver/chromedriver-linux64:$PATH"
 ENV RUNNER_MANUALLY_TRAP_SIG=1
 ENV ACTIONS_RUNNER_PRINT_LOG_TO_STDOUT=1
@@ -59,15 +58,21 @@ USER runner
 
 WORKDIR /home/runner
 
-# Copy the installation script
-COPY install-chrome.sh /usr/local/bin/install-chrome.sh
+# Copy the installation script for Google Chrome
+COPY install-chrome-driver.sh /usr/local/bin/install-chrome.sh
+COPY install-edge.sh /usr/local/bin/install-edge.sh
+COPY install-chrome-driver.sh /usr/local/bin/install-chrome-driver.sh
+
+RUN sudo chmod +x /usr/local/bin/install-chrome-driver.sh
+RUN sudo chmod +x /usr/local/bin/install-edge.sh
 RUN sudo chmod +x /usr/local/bin/install-chrome.sh
 
-# Run the installation script
-RUN sudo /usr/local/bin/install-chrome.sh $CHROME_DIR $CHROMEDRIVER_DIR
+RUN sudo /usr/local/bin/install-chrome.sh
+RUN sudo /usr/local/bin/install-chrome-driver.sh $CHROMEDRIVER_DIR
+RUN sudo /usr/local/bin/install-edge.sh
 
-# Add Chrome and ChromeDriver directories to PATH
-ENV PATH=$PATH:$CHROME_DIR:$CHROMEDRIVER_DIR
+# Add ChromeDriver directories to PATH
+ENV PATH=$PATH:$CHROMEDRIVER_DIR
 
 RUN sudo apt update -y \
     && sudo apt install -y --no-install-recommends \
@@ -97,6 +102,8 @@ RUN sudo apt update -y \
         tzdata \
         uidmap \
         xz-utils \
+        software-properties-common \
+        apt-transport-https \
         zip \
         && sudo apt clean \
         && sudo rm -rf /var/lib/apt/lists/*
