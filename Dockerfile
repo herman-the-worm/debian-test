@@ -31,8 +31,7 @@ RUN apt-get update -y \
     ca-certificates \
     wget \
     apt-utils \
-    gnupg2 \
-    && rm -rf /var/lib/apt/lists/*
+    gnupg2
 
 
 RUN adduser --disabled-password --gecos "" --uid 1001 runner \
