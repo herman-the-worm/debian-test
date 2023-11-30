@@ -59,7 +59,7 @@ USER runner
 WORKDIR /home/runner
 
 # Copy the installation script for Google Chrome
-COPY install-chrome-driver.sh /usr/local/bin/install-chrome.sh
+COPY install-chrome.sh /usr/local/bin/install-chrome.sh
 COPY install-edge.sh /usr/local/bin/install-edge.sh
 COPY install-chrome-driver.sh /usr/local/bin/install-chrome-driver.sh
 
@@ -69,6 +69,7 @@ RUN sudo chmod +x /usr/local/bin/install-chrome.sh
 
 RUN sudo /usr/local/bin/install-chrome.sh
 RUN sudo /usr/local/bin/install-chrome-driver.sh $CHROMEDRIVER_DIR
+RUN sudo /usr/local/bin/install-edge.sh
 
 # Add ChromeDriver directories to PATH
 ENV PATH=$PATH:$CHROMEDRIVER_DIR
