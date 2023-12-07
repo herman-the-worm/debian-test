@@ -41,9 +41,9 @@ ENV CHROME_BIN=/usr/bin/google-chrome \
     CHROME_PATH=/usr/lib/google-chrome/
 
 # Install Flutter
-RUN curl -fsSL https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.13.9-stable.tar.xz -o flutter.tar.xz \
-    && tar xf flutter.tar.xz -C . \
-    && rm flutter.tar.xz
+RUN sudo curl -fsSL https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.13.9-stable.tar.xz -o flutter.tar.xz \
+    && sudo tar xf flutter.tar.xz -C . \
+    && sudo rm flutter.tar.xz
 
 ENV PATH="$PATH:/home/runner/flutter/bin"
 
