@@ -27,6 +27,12 @@ RUN adduser --disabled-password --gecos "" --uid 1001 runner \
     && usermod -aG sudo runner \
     && echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers
 
+WORKDIR /home/runner
+
+COPY checkmybuilding_app-dev.zip /home/runner/
+RUN unzip /home/runner/checkmybuilding_app-dev.zip -d /home/runner/ \
+    && rm /home/runner/checkmybuilding_app-dev.zip
+
 USER runner
 
 # Install Chrome and ChromeDriver
