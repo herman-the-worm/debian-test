@@ -1,4 +1,4 @@
-FROM ubuntu:jammy-20231128
+FROM  --platform=linux/amd64 ubuntu:jammy-20231128
 
 # Set non-interactive frontend for apt-get (prevents tzdata prompt)
 ENV DEBIAN_FRONTEND=noninteractive
