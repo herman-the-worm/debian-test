@@ -7,8 +7,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV CHROMEDRIVER_DIR="/opt/chromedriver" \
     PATH="/opt/google-chrome/chrome-linux64:/opt/chromedriver/chromedriver-linux64:$PATH"
 # Update and install only the necessary packages
-chromedriver --port=4444 --whitelisted-ips="" & flutter drive --driver=test_driver/integration_test.dart --target=integration_test/login_test.dart -d web-server --verbose
-
 
 RUN apt update -y \
     && apt install -y --no-install-recommends \
