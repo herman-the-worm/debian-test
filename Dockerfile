@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV RUNNER_MANUALLY_TRAP_SIG=1
 ENV ACTIONS_RUNNER_PRINT_LOG_TO_STDOUT=1
 ARG TARGETOS=linux
+ARG RUNNER_ARCH="x64"
 ARG TARGETARCH=amd64
 ARG RUNNER_VERSION=2.311.0
 ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
@@ -24,6 +25,7 @@ RUN apt update -y \
         unzip \
         ca-certificates \
         gnupg2 \
+        tar \
         sudo \
         libgbm-dev \
         xz-utils \
