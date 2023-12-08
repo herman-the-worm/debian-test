@@ -72,3 +72,6 @@ ENV PATH="$PATH:/home/runner/flutter/bin"
 
 RUN    sudo apt clean \
         && sudo rm -rf /var/lib/apt/lists/*
+
+RUN sudo chmod 777 /home/runner/* -R
+RUN sudo sudo chown -R runner:runner /home/runner
