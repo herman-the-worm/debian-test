@@ -2,6 +2,15 @@ FROM  --platform=linux/amd64 ubuntu:jammy-20231128
 
 # Set non-interactive frontend for apt-get (prevents tzdata prompt)
 ENV DEBIAN_FRONTEND=noninteractive
+ENV RUNNER_MANUALLY_TRAP_SIG=1
+ENV ACTIONS_RUNNER_PRINT_LOG_TO_STDOUT=1
+ARG TARGETOS=linux
+ARG TARGETARCH=amd64
+ARG RUNNER_VERSION=2.311.0
+ARG RUNNER_CONTAINER_HOOKS_VERSION=0.5.0
+ARG DOCKER_VERSION=24.0.6
+ARG BUILDX_VERSION=0.11.2
+
 
 # Set up environment variables
 ENV CHROMEDRIVER_DIR="/opt/chromedriver" \
@@ -20,10 +29,12 @@ RUN apt update -y \
         xz-utils \
         git
 
-# Create a non-root user
 RUN adduser --disabled-password --gecos "" --uid 1001 runner \
+    && groupadd docker --gid 123 \
     && usermod -aG sudo runner \
-    && echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers
+    && usermod -aG docker runner \
+    && echo "%sudo   ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers \
+    && echo "Defaults env_keep += \"DEBIAN_FRONTEND\"" >> /etc/sudoers
 
 WORKDIR /home/runner
 
